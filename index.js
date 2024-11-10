@@ -1,52 +1,17 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const Product = require("./models/product");
-
+const express = require('express');
 const app = express();
+const cors = require ('cors')
+const port = 5000;
+app.use(cors())
 
-app.use(express.json());
+const num = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"];
 
-app.get("/", (req, res) => {
-  res.send("Hello World!!! from node Api Server updated Here");
+app.get('/api/start-game', (req, res) => {
+    
+    const cardDeck = [...num, ...num].sort(() => 0.5 - Math.random());
+    res.json({ board: cardDeck });
 });
 
-app.get("/api/products", async (req, res) => {
-  try {
-    const product = await Product.find({});
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+app.listen(port, () => {
+    console.log(`Memory game backend running at http://localhost:${port}`);
 });
-app.get("/api/products", async (req, res) => {
-  try {
-    const product = await Product.find({});
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-app.get("/api/products/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const product = await Product.findById(id);
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-mongoose
-  .connect(
-    "mongodb+srv://mogashoablessing676:SwgX9iRUmfEZx7OZ@mydb.vw5gv.mongodb.net/myappDB?retryWrites=true&w=majority&appName=MyDB"
-  )
-  .then(() => {
-    console.log("Connected to database");
-    app.listen(3000, () => {
-      console.log("Server is running on port 3000");
-    });
-  })
-  .catch(() => {
-    console.log("connection Failed");
-  });

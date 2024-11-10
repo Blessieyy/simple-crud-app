@@ -1,0 +1,100 @@
+
+.App {
+  font-family: 'Courier New', monospace;
+}
+
+
+
+
+/* General Reset */
+body {
+  
+  background-color: #0c2541; /* Deep navy blue for a night sky */
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+
+/* Game Grid Styling */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  padding: 25px;
+  background-color: #16213e; /* Dark blue background for a space-like feel */
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
+  /* max-width: 900px; */
+  width: 200%;
+  border: 2px solid #4b5d67; /* Subtle border color */
+}
+
+/* Card Styling */
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #283c63, #1b2a4e); /* Dark gradient for a celestial look */
+  color: #e0e4f1; /* Light silver color for lunar glow */
+  width: 100%;
+  height: 120px;
+  font-size: 1.8em;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  border: 1px solid #3a506b; /* Slightly lighter border */
+  transition: transform 0.4s ease, background-color 0.4s ease;
+  animation: float 3s ease-in-out infinite; /* Floating animation */
+}
+
+/* Card Flipped and Hover States */
+.card:hover {
+  background-color: #7d8597; /* Lighter, moonlit color on hover */
+  color: #f0f4f8; /* Brighter text color */
+  transform: translateY(-8px);
+}
+
+.card:active {
+  transform: scale(0.95);
+}
+
+.card.flipped {
+  background-color: #c9d6df; /* Silvery lunar color for flipped cards */
+  color: #333; /* Darker text color */
+  border: 1px solid #4b5d67; /* Slight contrast for flipped border */
+}
+
+/* Floating Animation for Cards */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Pulsing Glow Animation for Flipped Cards */
+.card.flipped {
+  animation: glow 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(200, 214, 223, 0.7);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(200, 214, 223, 1);
+  }
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr); /* Adjust columns for smaller screens */
+  }
+}
